@@ -56,17 +56,16 @@ void run_task(void*) {
 	system_os_post(MY_TASK_PRIORITY, 0, 0);
 }
 
-//thread entry point
+//thread entry point,no for while allowed(!)
 void my_task(os_event_t *) {
-	// start the task again in 500  msec
-	Serial.println("Worker Thread Running");
+	
 
 	if (Serial.available() > 0)
 	{
 		char k = Serial.read();
 		printMsg(BOOT, true, "Received: %c", k);
 	}
-
+	// start the task again in 50  msec
 	os_timer_arm(&task_start_timer, 50 /*ms*/, 0 /*once*/);
 }
 
